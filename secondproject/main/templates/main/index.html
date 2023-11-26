@@ -1,0 +1,100 @@
+{% extends 'main/layout.html' %}
+{% load static %}
+
+{% block title %}
+    News
+{% endblock %}
+
+{% block body %}
+<div class="fixed-background">
+  <div class="title-content">
+    <p>Bring Your Ideas to Life</p>
+    <p class="title-down">Everything that you dreamed of can be brought to life exactly at the</p>
+    <p class="title-down2">moment when you decide to win.</p>
+    
+    <svg onclick="scrollToHeight(500)" role="presentation" class="t-cover__arrow-svg" style="fill:#ffffff;" x="0px" y="0px" width="38.417px" height="18.592px" viewBox="0 0 38.417 18.592"><g><path d="M19.208,18.592c-0.241,0-0.483-0.087-0.673-0.261L0.327,1.74c-0.408-0.372-0.438-1.004-0.066-1.413c0.372-0.409,1.004-0.439,1.413-0.066L19.208,16.24L36.743,0.261c0.411-0.372,1.042-0.342,1.413,0.066c0.372,0.408,0.343,1.041-0.065,1.413L19.881,18.332C19.691,18.505,19.449,18.592,19.208,18.592z"></path></g></svg>
+  </div>
+</div>
+
+<hr class="horizontal-line" id="trigger-point2">
+
+{% for item in object_list %}
+  {% if item.photo %}
+  <a href="{% url 'post_detail' item.id %}">
+    <div class="mainindex clickable-div" onclick="window.location.href='{% url 'post_detail' item.id %}';">
+        <div class="img">
+          <img src="{{ item.photo.url }}" alt="Uploaded Photo" class="uploaded-photo" width="700" height="450">
+        </div>
+
+        <div class="db">
+          <ul>
+            <li class="title"><h2>{{ item.title }}</h2></li>
+            <li class="indexcont">
+                {{ item.content|slice:":356" }}
+                {% if item.content|length > 356 %}
+                    ...
+                {% endif %}
+            </li>
+              {% if item.time_create != item.time_update %}
+                <p class="time-cu"><u><b>Update:</b></u> {{ item.time_update|date:"F d, Y, H:i" }}</p>
+
+                {% else %}
+                  <p class="time-cu">{{ item.time_create|date:"F d, Y, H:i" }}</p>
+                {% endif %}
+          </ul>
+        </div>
+    </div>  
+  </a>
+
+
+    <hr class="horizontal-line">
+
+    
+    {% else %}
+
+
+    <a href="{% url 'post_detail' item.id %}">
+      <div class="mainindex2 clickable-div" onclick="window.location.href='{% url 'post_detail' item.id %}';">
+
+        <div class="db2">
+          <ul>
+            <li class="title"><h2>{{ item.title }}</h2></li>
+            <li class="indexcont">
+              {{ item.content|slice:":856" }}
+              {% if item.content|length > 856 %}
+                  ...
+              {% endif %}
+            </li>
+              {% if item.time_create != item.time_update %}
+                <p class="time-cu">{{ item.time_update|date:"F d, Y, H:i" }}</p>
+
+                {% else %}
+                <p class="time-cu">{{ item.time_create|date:"F d, Y, H:i" }}</p>
+              {% endif %}
+          </ul>
+        </div>
+      </div> 
+    </a> 
+
+
+    <hr class="horizontal-line">
+  {% endif %}
+{% endfor %}
+
+{% if page_obj.has_other_pages %}
+  <nav>
+    <ul class="list-page">
+      {% for p in paginator.page_range %}
+        {% if  page_obj.number == p%}
+          <li class="page-num page-cel">{{p}}</li>
+        {% elif p >= page_obj.number|add:-2 and p <= page_obj.number|add:2 %}
+          <li class="page-num">
+            <a href="?page={{p}}">{{p}}</a>
+          </li>
+        {% endif %}
+      {% endfor %}
+    </ul>
+  </nav>
+{% endif %}
+<script src="{% static 'js/js.js' %}"></script>
+{% endblock %}

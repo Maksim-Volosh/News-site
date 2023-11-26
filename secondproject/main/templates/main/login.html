@@ -1,0 +1,32 @@
+{% extends "main/layout.html" %}
+
+{% block title %}Login{% endblock  %}
+
+{% block  body %}
+<form class="mysign" method="post">
+        <h1 class="h3 fw-normal label">Please Login</h1>
+
+        {% csrf_token %}
+
+        <div>
+            {{form.non_field_errors}}
+        </div>
+
+        <div class="form-floating">
+            {{ form.username }}
+            <label for="floatingInput">Username</label>
+        </div>
+
+        <div class="form-floating">
+            {{ form.password }}
+            <label for="floatingPassword">Your Password</label>
+        </div>
+
+        <div class="form-check text-start my-3 accept-perm">
+            <input class="form-check-input" type="checkbox" value="remember-me" id="flexCheckDefault">
+            <label class="form-check-label accept-box" for="flexCheckDefault"> Remember me</label>
+            <button type="submit" class="btn btn-primary btn-logsign2">Sign up</button>
+        </div>
+</form>
+{% endblock %}
+    

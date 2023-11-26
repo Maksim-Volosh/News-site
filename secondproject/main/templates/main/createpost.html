@@ -1,0 +1,40 @@
+{% extends "main/layout.html" %}
+{% load static %}
+
+{% block title %}Create the post{% endblock  %}
+
+{% block  body %}
+
+
+<div class="create-post">
+    <h1>Create the post</h1>
+    
+    <form action="{% url 'createpost' %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <div class="form-error">{{ form.non_field_errors }}</div>
+
+        <p><label for="{{ form.title.id_for_label }}"></label> {{ form.title }}</p>
+        <div class="form-error">{{ form.title.errors }}</div>
+
+        <p><label for="{{ form.content.id_for_label }}"></label> {{ form.content }}</p>
+        <div class="form-error">{{ form.content.errors }}</div>
+
+        <label class="input-file">
+            {{ form.photo }}
+            <span id="file-label">Выберите файл</span>
+        </label>
+        
+        <div class="form-error">{{ form.photo.errors }}</div>
+
+        <div class="form-add">
+            <p><label for="{{ form.is_published.id_for_label }}">Public: </label> {{ form.is_published }}</p>
+            <div class="form-error">{{ form.is_published.errors }}</div>
+
+            <button type="submit" class="btn btn-primary btn-logsign2">Create</button>
+        </div>
+    </form>
+    <script src="{% static 'js/js.js' %}"></script>
+</div>
+{% endblock %}
+    

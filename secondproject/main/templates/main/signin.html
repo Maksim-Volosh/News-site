@@ -1,0 +1,54 @@
+{% extends "main/layout.html" %}
+
+{% block title %}Sign up{% endblock  %}
+
+{% block  body %}
+  <form method="post" class="mysign">
+    {% csrf_token %}
+
+    <h1 class="h3 fw-normal label">Please Sign up</h1>
+
+    <div class="form-floating">
+      {{ form.username }}
+      <label for="floatingInput">Username</label>
+      <div class="error">
+        {{ form.username.errors }}
+      </div>
+    </div>
+
+    <div class="form-floating">
+      {{ form.email }}
+      <label for="floatingInput">Email address</label>
+      <div class="error">
+        {{ form.email.errors }}
+      </div>
+    </div>
+
+    <div class="form-floating">
+      {{ form.password1 }}
+      <label for="floatingPassword">Your Password</label>
+      <div class="error">
+        {{ form.password1.errors }}
+      </div>
+    </div>
+
+    <div class="form-floating">
+      {{ form.password2 }}
+      <label for="floatingPassword">Confirm Password</label>
+      <div class="error">
+        {{ form.password2.errors }}
+      </div>
+    </div>
+
+    <div class="form-check text-start my-3 accept-perm">
+      <input class="form-check-input" type="checkbox" value="remember-me" id="flexCheckDefault" required>
+      <label class="form-check-label accept-box" for="flexCheckDefault"> I agree with the policy and privacy</label>
+      <button type="submit" class="btn btn-primary btn-logsign2" id="submitButton">Submit</button>
+    </div>
+
+  </form>
+
+{% endblock %}
+
+
+    

@@ -1,0 +1,17 @@
+{% extends "main/layout.html" %}
+
+{% block body %}
+<div class="delete-post"></div>
+    <h2>Подтвердите удаление</h2>
+    <p>Вы уверены, что хотите удалить эту запись?</p>
+    <div class="form-delete">
+        <form method="post">
+            {% csrf_token %}
+            <button class="bnt1 bnt-delete" type="submit">Удалить</button>
+        </form>
+    
+        <form method="get" action="{% url 'home' %}">
+            <button class="bnt2 bnt-delete2" type="submit">Отмена</button>
+        </form>
+    </div> 
+{% endblock %}
